@@ -1,0 +1,7 @@
+venv
+.env
+src/__pycache__
+AAPL.pdf
+example.pdf
+.streamlit
+finsight9
