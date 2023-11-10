@@ -1,0 +1,71 @@
+{
+    "personal_details": {
+      "full_name": "",
+      "contact_info": {
+        "email": "",
+        "phone": "",
+        "linkedin": ""
+      },
+      "professional_summary": ""
+    },
+    "education": [
+      {
+        "institution": "",
+        "degree": "",
+        "field_of_study": "",
+        "graduation_date": ""
+      }
+    ],
+    "work_experience": [
+      {
+        "company": "",
+        "title": "",
+        "duration": "",
+        "description": "",
+        "achievements": []
+      }
+    ],
+    "projects": [
+      {
+        "name": "",
+        "description": "",
+        "technologies": "",
+        "role": ""
+      }
+    ],
+    "skills": [],
+    "certifications": [
+      {
+        "title": "",
+        "certifying_body": "",
+        "date": ""
+      }
+    ],
+    "publications": [
+      {
+        "title": "",
+        "co_authors": [],
+        "date": ""
+      }
+    ],
+    "awards": [
+      {
+        "title": "",
+        "awarding_body": "",
+        "date": ""
+      }
+    ],
+    "additional_sections": {
+      "volunteer_experience": [
+        {
+          "organization": "",
+          "role": "",
+          "duration": "",
+          "description": ""
+        }
+      ],
+      "languages": [],
+      "interests": []
+    }
+  }
+  
