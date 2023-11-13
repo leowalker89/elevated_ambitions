@@ -1,5 +1,5 @@
 ## About the App and Its Features:
-Finsight is a cutting-edge AI assistant tailored for portfolio managers, investors, and finance enthusiasts. It streamlines the process of gaining crucial insights and summaries about a company in a user-friendly manner.
+
 
 
 #### GitHub Repository:
