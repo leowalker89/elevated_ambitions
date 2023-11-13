@@ -1,0 +1,83 @@
+{
+    "bsonType": "object",
+    "required": ["personal_details", "education", "work_experience"],
+    "properties": {
+      "personal_details": {
+        "bsonType": "object",
+        "required": ["full_name", "contact_info"],
+        "properties": {
+          "full_name": { "bsonType": "string" },
+          "contact_info": {
+            "bsonType": "object",
+            "required": ["email"],
+            "properties": {
+              "email": { "bsonType": "string" },
+              "phone": { "bsonType": "string" },
+              "linkedin": { "bsonType": "string" }
+            }
+          },
+          "professional_summary": { "bsonType": "string" }
+        }
+      },
+      "education": {
+        "bsonType": "array",
+        "minItems": 1,
+        "items": {
+          "bsonType": "object",
+          "required": ["institution", "degree", "field_of_study", "graduation_date"],
+          "properties": {
+            "institution": { "bsonType": "string" },
+            "degree": { "bsonType": "string" },
+            "field_of_study": { "bsonType": "string" },
+            "graduation_date": { "bsonType": "string" }
+          }
+        }
+      },
+      "work_experience": {
+        "bsonType": "array",
+        "minItems": 1,
+        "items": {
+          "bsonType": "object",
+          "required": ["company", "title", "duration"],
+          "properties": {
+            "company": { "bsonType": "string" },
+            "title": { "bsonType": "string" },
+            "duration": { "bsonType": "string" }, 
+            "description": { "bsonType": "string" },
+            "achievements": {
+              "bsonType": "array",
+              "items": { "bsonType": "string" }
+            }
+          }
+        }
+      },
+     
+      "additional_sections": {
+        "bsonType": "object",
+        "properties": {
+          "volunteer_experience": {
+            "bsonType": "array",
+            "items": {
+              "bsonType": "object",
+              "required": ["organization", "role", "duration"],
+              "properties": {
+                "organization": { "bsonType": "string" },
+                "role": { "bsonType": "string" },
+                "duration": { "bsonType": "string" },
+                "description": { "bsonType": "string" }
+              }
+            }
+          },
+          "languages": {
+            "bsonType": "array",
+            "items": { "bsonType": "string" }
+          },
+          "interests": {
+            "bsonType": "array",
+            "items": { "bsonType": "string" }
+          }
+        }
+      }
+    }
+  }
+  
