@@ -13,8 +13,6 @@ Given the task of analyzing the resume provided below, identify and organize the
 - Publications: Titles of publications, co-authors if applicable, and date of publication.
 - Awards: Titles of any awards or honors received, awarding bodies, and date of receipt.
 
-The User annotated that the following fields should be present in the resume: {fields_list}
-
 For fields not explicitly mentioned by the user, ensure to check for common sections such as volunteer experience, languages spoken, and hobbies or interests if they are professionally relevant.
 
 Use the JSON structure below file to format your output. If any section does not apply or information is not available, it should be omitted from the JSON object. Ensure the output is formatted properly with the correct data types for each field (e.g., arrays, strings, objects).
@@ -22,3 +20,5 @@ Use the JSON structure below file to format your output. If any section does not
 ----
 {response_template}
 ----
+
+Ensure that your response is properly json formatted
