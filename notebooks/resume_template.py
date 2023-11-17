@@ -1,5 +1,5 @@
-from pydantic import BaseModel, Field
-from typing import List, Optional
+from pydantic import BaseModel, Field, ValidationError
+from typing import List, Optional, Dict
 
 class ContactInfo(BaseModel):
     email: Optional[str] = None
@@ -17,15 +17,12 @@ class Education(BaseModel):
     field_of_study: Optional[str] = None
     graduation_date: Optional[str] = None
 
-class Notable_Contribution(BaseModel):
-    notable_contribution: Optional[str] = None
-
 class WorkExperience(BaseModel):
     company: Optional[str] = None
     title: Optional[str] = None
     duration: Optional[str] = None
     description: Optional[str] = None
-    notable_contributions: Optional[List[Notable_Contribution]] = None
+    notable_contributions: Optional[List[str]] = None
 
 class Project(BaseModel):
     name: Optional[str] = None
@@ -69,3 +66,12 @@ class Resume(BaseModel):
     publications: List[Publication] = []
     awards: List[Award] = []
     additional_sections: Optional[AdditionalSections] = None
+
+## the following classes are for the interview profile
+class InterviewResponse(BaseModel):
+    background: Optional[str] = None
+    question: str
+    answer: str
+
+class InterviewProfile(BaseModel):
+    responses: Dict[str, List[InterviewResponse]] = Field(default_factory=dict)
