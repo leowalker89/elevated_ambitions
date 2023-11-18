@@ -36,7 +36,7 @@ Once you understand your persona and what you need to do answer the following qu
 
 Structure your response with the answers like you received the questions. Here is the template to remind you:
 ---
-{template}
+{response_template}
 ---
 
 Ensure that your response is properly json formatted
