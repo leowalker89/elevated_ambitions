@@ -22,3 +22,5 @@ pip install -r requirements.txt
     ```
 
 While this project is still under development the main components as of now are the notebooks. However the notebooks do utilize the prompts folder and the resume_template.py file.
+
+The evaluation portion also requires access to LangSmith or LangHub. There is currently a waitlist to have access to it.
