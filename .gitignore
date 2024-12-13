@@ -1,6 +1,6 @@
-venv
+.venv
 .env
-src/__pycache__
+
 AAPL.pdf
 example.pdf
 .streamlit
@@ -8,3 +8,4 @@ finsight9
 ea_env
 __pycache__
 *.DS_Store
+credentials/
