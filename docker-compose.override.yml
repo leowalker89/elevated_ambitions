@@ -1,0 +1,9 @@
+services:
+  mongodb:
+    command: mongod --auth
+    environment:
+      MONGODB_URI: mongodb+srv://JobFetcher:J0BcA%24TLe@inboundjobs.pac6qer.mongodb.net/?retryWrites=true&w=majority&appName=InboundJobs
+  
+  app:
+    environment:
+      MONGODB_URI: mongodb+srv://JobFetcher:J0BcA%24TLe@inboundjobs.pac6qer.mongodb.net/?retryWrites=true&w=majority&appName=InboundJobs 

@@ -1,0 +1,33 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "elevated_ambitions"
+version = "0.1.0"
+authors = [
+    { name = "Leo Walker" },
+]
+description = "Job description processing and elevation system"
+requires-python = ">=3.9"
+dependencies = [
+    "pytest",
+    "pytest-asyncio",
+    "logfire",
+    "langchain",
+    "langchain-groq",
+    "pymongo",
+    "python-dotenv",
+    "tqdm",
+    "langgraph>=0.2.59",
+]
+
+[tool.pytest.ini_options]
+pythonpath = [
+    "backend"
+]
+asyncio_mode = "auto"
+
+[tool.hatch.build.targets.wheel]
+packages = ["backend"]
+
