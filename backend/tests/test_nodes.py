@@ -112,68 +112,80 @@ async def test_extraction_node():
     )
     
     # Run extraction
-    result_state = await extraction_node(initial_state)
+    state_updates = await extraction_node(initial_state)
+    
+    initial_state.structured_job = state_updates.get("structured_job", None)
+    initial_state.attempts = state_updates.get("attempts", 0)
+    initial_state.status = state_updates.get("status", initial_state.status)
+    initial_state.updated_at = state_updates.get("updated_at", datetime.now(UTC))
     
     # Print detailed output
     print("\n=== Test Results ===")
-    print(f"Status: {result_state.status}")
-    print(f"Attempts: {result_state.attempts}")
-    print(f"Error Message: {result_state.error_message}")
+    print(f"Status: {initial_state.status}")
+    print(f"Attempts: {initial_state.attempts}")
+    print(f"Error Message: {initial_state.error_message}")
     print("\nStructured Job Output:")
-    if result_state.structured_job:
-        print(json.dumps(result_state.structured_job.model_dump(), indent=2))
+    if initial_state.structured_job:
+        print(json.dumps(initial_state.structured_job.model_dump(), indent=2))
     else:
         print("No structured job output generated")
     print("==================\n")
     
     # Basic assertions
-    assert result_state is not None
-    assert result_state.structured_job is not None
-    assert result_state.error_message is None
+    assert initial_state is not None
+    assert initial_state.structured_job is not None
+    assert initial_state.error_message is None
     
     # Check specific fields
-    structured_job = result_state.structured_job
+    structured_job = initial_state.structured_job
     assert structured_job.company_overview.company_name == "Chai"
     assert structured_job.role_summary.title == "AI Engineer"
     assert "Palo Alto" in structured_job.company_overview.locations
     
-    return result_state
+    return initial_state
 
 @pytest.mark.asyncio
 async def test_grader_node():
     """Test the grading of extracted job information."""
     
     # Create initial state with sample structured job
-    initial_state = JobDescriptionProcessingState(
+    test_grading_state = JobDescriptionProcessingState(
         job_id="test_job_1",
         raw_job_data=SAMPLE_JOB.model_dump(),
         structured_job=SAMPLE_STRUCTURED_JOB,
         created_at=datetime.now(UTC),
-        updated_at=datetime.now(UTC)
+        updated_at=datetime.now(UTC),
+        attempts=1,
     )
     
     # Run grader
-    result_state = await grader_node(initial_state)
+    result_state = await grader_node(test_grading_state)
+    
+    test_grading_state.grader_output = result_state.get("grader_output", None)
+    test_grading_state.status = result_state.get("status", test_grading_state.status)
+    test_grading_state.last_feedback = result_state.get("last_feedback", None)
+    test_grading_state.error_message = result_state.get("error_message", None)
+    test_grading_state.updated_at = result_state.get("updated_at", datetime.now(UTC))
     
     # Print detailed output
     print("\n=== Grader Results ===")
-    print(f"Status: {result_state.status}")
-    print(f"Attempts: {result_state.attempts}")
-    print(f"Error Message: {result_state.error_message}")
+    print(f"Status: {test_grading_state.status}")
+    print(f"Attempts: {test_grading_state.attempts}")
+    print(f"Error Message: {test_grading_state.error_message}")
     print("\nGrader Output:")
-    if result_state.grader_output:
-        print(json.dumps(result_state.grader_output.model_dump(), indent=2))
+    if test_grading_state.grader_output:
+        print(json.dumps(test_grading_state.grader_output.model_dump(), indent=2))
     else:
         print("No grader output generated")
     print("==================\n")
     
     # Basic assertions
-    assert result_state is not None
-    assert result_state.grader_output is not None
-    assert result_state.error_message is None
+    assert test_grading_state is not None
+    assert test_grading_state.grader_output is not None
+    assert test_grading_state.error_message is None
     
     # Check grading output
-    grader_output = result_state.grader_output
+    grader_output = test_grading_state.grader_output
     assert hasattr(grader_output, 'overall_grade'), "Grader output should have an overall grade"
     assert grader_output.overall_grade in ['A', 'B', 'C', 'D', 'F'], "Grade should be A-F"
     

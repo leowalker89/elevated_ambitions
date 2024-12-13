@@ -2,24 +2,6 @@ from typing import List, Optional
 from enum import Enum
 from pydantic import BaseModel, Field
 
-class JobLevelEnum(str, Enum):
-    """
-    A broad enumeration of possible job seniority levels.
-    If the job posting does not explicitly mention one of these, leave as None.
-    """
-    INTERN = "intern"
-    ENTRY = "entry"
-    ASSOCIATE = "associate"
-    MID = "mid"
-    SENIOR = "senior"
-    STAFF = "staff"
-    PRINCIPAL = "principal"
-    LEAD = "lead"
-    DIRECTOR = "director"
-    VP = "vp"
-    C_SUITE = "c_suite"
-    EXECUTIVE = "executive"
-
 class RoleTypeEnum(str, Enum):
     """
     Indicates the general role type.
@@ -87,7 +69,7 @@ class RoleSummary(BaseModel):
     level, and basic working arrangements.
     """
     title: str = Field(..., description="Job title as stated.")
-    job_level: Optional[JobLevelEnum] = Field(None, description="Job level if explicitly mentioned.")
+    job_level: Optional[str] = None
     role_type: Optional[RoleTypeEnum] = Field(None, description="Role type if explicitly mentioned.")
     employment_type: Optional[str] = Field(None, description="Employment type (e.g., full-time) if stated.")
     remote_options: Optional[str] = Field(None, description="e.g., 'remote', 'on-site', 'hybrid' if stated.")
