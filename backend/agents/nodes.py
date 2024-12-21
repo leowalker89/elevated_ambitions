@@ -6,8 +6,7 @@ from langchain.prompts import ChatPromptTemplate
 from datetime import datetime
 
 from models.job_description_models import JobDescription, GraderOutput
-from models.job_description_workflow_state import JobDescriptionProcessingState, JobDescriptionProcessingStatus
-from models.jobs_search_models import JobListing
+from models.job_description_workflow_state import JobDescriptionProcessingState, ProcessingStatusType
 from prompts.job_description_processing import job_description_annotator, job_description_grader
 
 load_dotenv()
@@ -19,15 +18,10 @@ async def extraction_node(state: JobDescriptionProcessingState) -> dict:
         state (JobDescriptionProcessingState): Current workflow state containing raw job data
         
     Returns:
-        dict: Updates to the workflow state including:
-            - status: Current processing status
-            - attempts: Incremented attempt counter
-            - structured_job: Extracted job data (if successful)
-            - error_message: Any error information
-            - updated_at: Timestamp of the update
+        dict: Updates to the workflow state including structured job data and status
     """
     state_updates = {
-        "status": JobDescriptionProcessingStatus.EXTRACTING,
+        "status": "extracting",
         "attempts": state.attempts + 1,
         "updated_at": datetime.now()
     }
@@ -56,6 +50,7 @@ async def extraction_node(state: JobDescriptionProcessingState) -> dict:
             model="llama-3.3-70b-versatile",
             temperature=0.1,
             max_retries=2,
+            stop_sequences=None
         ).with_structured_output(JobDescription)
         
         structured_job = await (prompt | extraction_model).ainvoke(context)
@@ -67,7 +62,7 @@ async def extraction_node(state: JobDescriptionProcessingState) -> dict:
         
     except Exception as e:
         state_updates.update({
-            "status": JobDescriptionProcessingStatus.FAILED,
+            "status": "failed",
             "error_message": str(e)
         })
     
@@ -80,12 +75,7 @@ async def grader_node(state: JobDescriptionProcessingState) -> dict:
         state (JobDescriptionProcessingState): Current workflow state containing extracted job data
         
     Returns:
-        dict: Updates to the workflow state including:
-            - status: Updated processing status based on grade
-            - grader_output: Grading results and feedback
-            - last_feedback: Detailed feedback for potential retry
-            - error_message: Any error information
-            - updated_at: Timestamp of the update
+        dict: Updates to the workflow state including grading results and status
     """
     state_updates = {
         "updated_at": datetime.now()
@@ -95,7 +85,7 @@ async def grader_node(state: JobDescriptionProcessingState) -> dict:
         prompt = ChatPromptTemplate.from_messages([
             ("system", job_description_grader),
             ("user", """
-            Please grade the following job description extraction:
+            Please evaluate the following job description extraction:
             
             Original Job Listing: {raw_job}
             Extracted Job Description: {structured_job}
@@ -106,7 +96,7 @@ async def grader_node(state: JobDescriptionProcessingState) -> dict:
             model="llama-3.3-70b-versatile",
             temperature=0.1,
             max_retries=2,
-            stop_sequences=None,
+            stop_sequences=None
         ).with_structured_output(GraderOutput)
         
         grader_output = await (prompt | grader_model).ainvoke({
@@ -114,19 +104,24 @@ async def grader_node(state: JobDescriptionProcessingState) -> dict:
             "structured_job": state.structured_job
         })
         
-        # Determine status based on grade
-        if grader_output.overall_grade == 'A':
-            status = JobDescriptionProcessingStatus.COMPLETED
+        # Determine status based on quality score and improvement potential
+        if grader_output.overall_quality_score >= 0.8:
+            status = "completed"
             error_message = None
         elif state.attempts >= state.max_attempts:
-            if grader_output.overall_grade == 'B':
-                status = JobDescriptionProcessingStatus.COMPLETED
+            if grader_output.overall_quality_score >= 0.6:
+                status = "completed"
                 error_message = None
             else:
-                status = JobDescriptionProcessingStatus.FAILED
-                error_message = f"Max attempts reached. Final grade: {grader_output.overall_grade}"
+                status = "failed"
+                error_message = f"Max attempts reached. Final quality score: {grader_output.overall_quality_score}"
         else:
-            status = JobDescriptionProcessingStatus.EXTRACTING
+            # Check if any sections need improvement and have untapped source data
+            needs_another_pass = any(
+                section.needs_improvement 
+                for section in grader_output.sections
+            )
+            status = "extracting" if needs_another_pass else "completed"
             error_message = None
         
         state_updates.update({
@@ -138,7 +133,7 @@ async def grader_node(state: JobDescriptionProcessingState) -> dict:
         
     except Exception as e:
         state_updates.update({
-            "status": JobDescriptionProcessingStatus.FAILED,
+            "status": "failed",
             "error_message": str(e)
         })
     

@@ -1,41 +1,41 @@
 from typing import List, Optional
-from enum import Enum
 from pydantic import BaseModel, Field
 
-class RoleTypeEnum(str, Enum):
+class CompanyOverview(BaseModel):
     """
-    Indicates the general role type.
-    If not explicitly stated, leave as None.
+    Captures key information about the hiring organization.
+    This provides context about the company's profile, culture, and operating environment
+    to help candidates assess organizational fit.
     """
-    IC = "individual_contributor"
-    MANAGEMENT = "management"
-    EXECUTIVE_MANAGEMENT = "executive_management"
+    company_name: Optional[str] = Field(None, description="Company name.")
+    about: Optional[str] = Field(None, description="Company overview from provided information.")
+    mission_and_values: Optional[str] = Field(None, description="Company mission, vision, or values if stated.")
+    size: Optional[str] = Field(None, description="Company size details if provided.")
+    industry: Optional[str] = Field(
+        None, 
+        description="Primary industry if stated. Common values: tech, finance, healthcare, education, "
+                   "manufacturing, ecommerce, media, entertainment, government, consulting, retail, "
+                   "energy, telecom, transportation, real_estate, consumer_goods, biotech, "
+                   "pharmaceuticals, non_profit. Use best match or 'other' if none fit."
+    )
+    locations: Optional[str] = Field(None, description="Company or role location(s) if mentioned.")
 
-class IndustryEnum(str, Enum):
+class RoleSummary(BaseModel):
     """
-    A broad enumeration of possible industries.
-    If not clearly stated, leave as None.
+    Provides a high-level overview of the position being offered.
+    This summary helps candidates quickly understand the role's scope,
+    level, and basic working arrangements.
     """
-    TECH = "tech"
-    FINANCE = "finance"
-    HEALTHCARE = "healthcare"
-    EDUCATION = "education"
-    MANUFACTURING = "manufacturing"
-    ECOMMERCE = "ecommerce"
-    MEDIA = "media"
-    ENTERTAINMENT = "entertainment"
-    GOVERNMENT = "government"
-    CONSULTING = "consulting"
-    RETAIL = "retail"
-    ENERGY = "energy"
-    TELECOM = "telecom"
-    TRANSPORTATION = "transportation"
-    REAL_ESTATE = "real_estate"
-    CONSUMER_GOODS = "consumer_goods"
-    BIOTECH = "biotech"
-    PHARMACEUTICALS = "pharmaceuticals"
-    NON_PROFIT = "non_profit"
-    OTHER = "other"
+    title: str = Field(..., description="Job title as stated.")
+    job_level: Optional[str] = None
+    role_type: Optional[str] = Field(
+        None, 
+        description="Role type if explicitly mentioned. Common values: individual_contributor, "
+                   "management, executive_management. Use best match based on context."
+    )
+    employment_type: Optional[str] = Field(None, description="Employment type (e.g., full-time) if stated.")
+    remote_options: Optional[str] = Field(None, description="e.g., 'remote', 'on-site', 'hybrid' if stated.")
+    team_or_department: Optional[str] = Field(None, description="Team or department name if mentioned.")
 
 class JobMetadata(BaseModel):
     """
@@ -48,32 +48,6 @@ class JobMetadata(BaseModel):
     date_posted: Optional[str] = Field(None, description="Date the job was posted, e.g. '2024-05-01'.")
     apply_link: Optional[str] = Field(None, description="Direct link to apply for the job if provided.")
     source_platform: Optional[str] = Field(None, description="Platform or job board where this posting originated.")
-
-class CompanyOverview(BaseModel):
-    """
-    Captures key information about the hiring organization.
-    This provides context about the company's profile, culture, and operating environment
-    to help candidates assess organizational fit.
-    """
-    company_name: Optional[str] = Field(None, description="Company name.")
-    about: Optional[str] = Field(None, description="Company overview from provided information.")
-    mission_and_values: Optional[str] = Field(None, description="Company mission, vision, or values if stated.")
-    size: Optional[str] = Field(None, description="Company size details if provided.")
-    industry: Optional[IndustryEnum] = Field(None, description="Primary industry if stated. Use enum if provided explicitly, else None.")
-    locations: Optional[str] = Field(None, description="Company or role location(s) if mentioned.")
-
-class RoleSummary(BaseModel):
-    """
-    Provides a high-level overview of the position being offered.
-    This summary helps candidates quickly understand the role's scope,
-    level, and basic working arrangements.
-    """
-    title: str = Field(..., description="Job title as stated.")
-    job_level: Optional[str] = None
-    role_type: Optional[RoleTypeEnum] = Field(None, description="Role type if explicitly mentioned.")
-    employment_type: Optional[str] = Field(None, description="Employment type (e.g., full-time) if stated.")
-    remote_options: Optional[str] = Field(None, description="e.g., 'remote', 'on-site', 'hybrid' if stated.")
-    team_or_department: Optional[str] = Field(None, description="Team or department name if mentioned.")
 
 class ResponsibilitiesAndQualifications(BaseModel):
     """
@@ -121,58 +95,71 @@ class JobDescription(BaseModel):
     compensation_and_benefits: CompensationAndBenefits
     additional_information: AdditionalInformation
 
-class GradeEnum(str, Enum):
-    """
-    Standardized letter grades for evaluating parsing quality.
-    Definitions:
-    - A: Exceptional - no significant issues
-    - B: Good - minor issues
-    - C: Acceptable - noticeable issues but still usable
-    - D: Needs Improvement - major issues
-    - F: Failed - critical problems preventing use
-    """
-    A = "A"
-    B = "B"
-    C = "C"
-    D = "D"
-    F = "F"
-
 class GradingSection(BaseModel):
     """
-    Evaluation of a specific section of annotated job data.
-    Each rating is a letter grade (A, B, C, D, F).
-
-    Field Guidelines:
-    - accuracy_rating: Reflects how closely the extracted data matches the source.
-      A: Perfect match, F: Severe inaccuracies.
-    - assumption_rating: Reflects how well unsupported assumptions are avoided.
-      A: No unfounded assumptions, F: Multiple unsupported details.
-    - clarity_rating: Reflects how understandable the extracted data is.
-      A: Very clear, F: Confusing or unclear.
-    - conciseness_rating: Reflects how succinct and relevant the data is.
-      A: Well-optimized, F: Overly verbose or too sparse.
+    Evaluates the quality and completeness of extracted job description sections.
+    Provides both quantitative scoring and qualitative feedback to guide improvements.
+    
+    Quality scores range from 0.0 to 1.0:
+    - 0.0-0.3: Major issues or missing critical information
+    - 0.3-0.6: Present but needs significant improvement
+    - 0.6-0.8: Good but has room for improvement
+    - 0.8-1.0: Excellent, meets or exceeds expectations
     """
-    section_name: str = Field(..., description="Name of the section being evaluated.")
-    accuracy_rating: GradeEnum = Field(..., description="Accuracy of the extraction.")
-    assumption_rating: GradeEnum = Field(..., description="Avoidance of unwarranted assumptions.")
-    clarity_rating: GradeEnum = Field(..., description="Clarity of the extracted data.")
-    conciseness_rating: GradeEnum = Field(..., description="Conciseness of the extracted data.")
-    feedback: Optional[str] = Field(None, description="Additional comments on this section.")
+    section_name: str = Field(
+        ...,
+        description="Name of the section being evaluated (e.g., 'company_overview', 'role_summary')"
+    )
+    
+    quality_score: float = Field(
+        ...,
+        ge=0.0,
+        le=1.0,
+        description="Overall quality score considering accuracy, completeness, and clarity. "
+                   "Higher scores (>0.8) indicate excellent extraction requiring no improvements, "
+                   "while lower scores suggest room for enhancement."
+    )
+    
+    needs_improvement: bool = Field(
+        ...,
+        description="Indicates whether additional relevant information exists in the source text "
+                   "that wasn't successfully extracted. True means there's untapped source data "
+                   "that could enhance this section, False means we've extracted all available "
+                   "relevant information."
+    )
+    
+    feedback: Optional[str] = Field(
+        None,
+        description="Specific observations about quality issues, missing information, "
+                   "or potential improvements. Should be actionable and specific to the section."
+    )
 
 class GraderOutput(BaseModel):
     """
-    Comprehensive evaluation of the entire annotation.
-
-    sections: Individual section evaluations.
-    overall_grade: Summarizes the overall quality using the same A-F scale.
-    - A: Exceptional across most or all sections
-    - B: Generally good, minor improvements needed
-    - C: Acceptable but requires improvements
-    - D: Significant issues found
-    - F: Critical failures present
-
-    overall_feedback: General comments on the entire annotation.
+    Comprehensive evaluation of the entire job description annotation.
+    Provides section-by-section assessments and an overall quality evaluation.
+    
+    Overall quality score ranges from 0.0 to 1.0:
+    - 0.0-0.3: Major issues across multiple sections
+    - 0.3-0.6: Significant improvements needed
+    - 0.6-0.8: Generally good with some areas for improvement
+    - 0.8-1.0: Excellent quality across most sections
     """
-    sections: List[GradingSection] = Field(..., description="List of graded sections.")
-    overall_grade: GradeEnum = Field(..., description="Overall letter grade for the annotation.")
-    overall_feedback: Optional[str] = Field(None, description="Overall feedback and suggestions.")
+    sections: List[GradingSection] = Field(
+        ..., 
+        description="List of individual section evaluations"
+    )
+    
+    overall_quality_score: float = Field(
+        ...,
+        ge=0.0,
+        le=1.0,
+        description="Aggregate quality score considering all sections. "
+                   "Reflects overall extraction quality and completeness."
+    )
+    
+    overall_feedback: Optional[str] = Field(
+        None, 
+        description="Summary feedback highlighting key improvement areas "
+                   "and general assessment of the extraction quality."
+    )

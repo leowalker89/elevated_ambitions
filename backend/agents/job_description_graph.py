@@ -1,7 +1,7 @@
 from langgraph.graph import StateGraph, START, END
 from datetime import datetime
 
-from models.job_description_workflow_state import JobDescriptionProcessingState, JobDescriptionProcessingStatus
+from models.job_description_workflow_state import JobDescriptionProcessingState, ProcessingStatusType
 from .nodes import extraction_node, grader_node
 
 def should_continue(state: JobDescriptionProcessingState) -> str:
@@ -15,20 +15,19 @@ def should_continue(state: JobDescriptionProcessingState) -> str:
         str: Name of the next node to execute or END
     """
     # Check for failure or completion first
-    if state.status in (JobDescriptionProcessingStatus.FAILED, JobDescriptionProcessingStatus.COMPLETED):
+    if state.status in ("failed", "completed"):
         return END
         
     # If we're in extracting state, move to grading
-    if state.status == JobDescriptionProcessingStatus.EXTRACTING:
+    if state.status == "extracting":
         return "grade_extraction"
         
     # If we're in grading state, check grade and attempts
-    if state.status == JobDescriptionProcessingStatus.GRADING:
-        if state.grader_output and state.grader_output.overall_grade == "A":
+    if state.status == "grading":
+        if state.grader_output and state.grader_output.overall_quality_score >= 0.8:
             return END
             
-        if (state.attempts >= state.max_attempts and 
-            state.grader_output and state.grader_output.overall_grade == "B"):
+        if state.attempts >= state.max_attempts:
             return END
             
         # Otherwise, try extraction again
