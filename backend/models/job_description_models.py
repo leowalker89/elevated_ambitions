@@ -135,31 +135,6 @@ class GradingSection(BaseModel):
     )
 
 class GraderOutput(BaseModel):
-    """
-    Comprehensive evaluation of the entire job description annotation.
-    Provides section-by-section assessments and an overall quality evaluation.
-    
-    Overall quality score ranges from 0.0 to 1.0:
-    - 0.0-0.3: Major issues across multiple sections
-    - 0.3-0.6: Significant improvements needed
-    - 0.6-0.8: Generally good with some areas for improvement
-    - 0.8-1.0: Excellent quality across most sections
-    """
-    sections: List[GradingSection] = Field(
-        ..., 
-        description="List of individual section evaluations"
-    )
-    
-    overall_quality_score: float = Field(
-        ...,
-        ge=0.0,
-        le=1.0,
-        description="Aggregate quality score considering all sections. "
-                   "Reflects overall extraction quality and completeness."
-    )
-    
-    overall_feedback: Optional[str] = Field(
-        None, 
-        description="Summary feedback highlighting key improvement areas "
-                   "and general assessment of the extraction quality."
-    )
+    """Simple grader output with just score and feedback."""
+    overall_quality_score: float = Field(ge=0.0, le=1.0)
+    overall_feedback: str

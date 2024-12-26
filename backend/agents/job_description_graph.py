@@ -1,59 +1,57 @@
 from langgraph.graph import StateGraph, START, END
 from datetime import datetime
 
-from models.job_description_workflow_state import JobDescriptionProcessingState, ProcessingStatusType
-from .nodes import extraction_node, grader_node
+from backend.models.job_description_workflow_state import JobDescriptionProcessingState
+from backend.agents.nodes import extraction_node, grader_node
 
 def should_continue(state: JobDescriptionProcessingState) -> str:
     """
-    Determines the next step in the workflow based on current state.
-    
-    Args:
-        state: Current workflow state containing status, grade, and attempt info
-        
-    Returns:
-        str: Name of the next node to execute or END
+    Determines if we should continue extraction or end the workflow.
+    Only called after grading to decide next step.
     """
-    # Check for failure or completion first
+    # First check terminal states
     if state.status in ("failed", "completed"):
         return END
         
-    # If we're in extracting state, move to grading
-    if state.status == "extracting":
-        return "grade_extraction"
-        
-    # If we're in grading state, check grade and attempts
-    if state.status == "grading":
-        if state.grader_output and state.grader_output.overall_quality_score >= 0.8:
+    # Check grading results
+    if state.grader_output:
+        # High quality - we're done
+        if state.grader_output.overall_quality_score >= 0.8:
+            state.status = "completed"
             return END
             
+        # Max attempts reached - end with current result
         if state.attempts >= state.max_attempts:
+            state.status = "failed"
             return END
             
-        # Otherwise, try extraction again
+        # Quality not good enough - try extraction again
+        state.status = "extracting"
         return "extract_job"
-        
-    # Default to extraction
+    
+    # Shouldn't get here, but default to extraction if we do
     return "extract_job"
 
-# Build the graph
-workflow = StateGraph(JobDescriptionProcessingState)
-
-# Add nodes
-workflow.add_node("extract_job", extraction_node)
-workflow.add_node("grade_job", grader_node)
-
-# Add edges
-workflow.add_edge(START, "extract_job")
-workflow.add_edge("extract_job", "grade_job")
-workflow.add_conditional_edges(
-    "grade_job",
-    should_continue,
-    {
-        "extract_job": "extract_job",
-        END: END
-    }
-)
-
-# Compile the graph
-graph = workflow.compile()
+def create_job_description_graph() -> StateGraph:
+    """
+    Creates and returns a compiled job description processing graph.
+    """
+    workflow = StateGraph(JobDescriptionProcessingState)
+    
+    # Add nodes
+    workflow.add_node("extract_job", extraction_node)
+    workflow.add_node("grade_job", grader_node)
+    
+    # Add edges
+    workflow.add_edge(START, "extract_job")
+    workflow.add_edge("extract_job", "grade_job")
+    workflow.add_conditional_edges(
+        "grade_job",
+        should_continue,
+        {
+            "extract_job": "extract_job",
+            END: END
+        }
+    )
+    
+    return workflow.compile()
