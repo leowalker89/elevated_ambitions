@@ -86,53 +86,20 @@ class JobDescription(BaseModel):
     A comprehensive, structured representation of a job posting.
     This model organizes all aspects of a job posting into logical sections,
     making it easier to process, analyze, and present job information consistently.
-    Use this class when parsing job descriptions or creating structured job postings.
+    
+    Required fields:
+    - role_summary: Contains essential job information like title and level
+    
+    Optional fields:
+    - All other sections that may not be present in every job posting
     """
-    metadata: JobMetadata
-    company_overview: CompanyOverview
-    role_summary: RoleSummary
-    responsibilities_and_qualifications: ResponsibilitiesAndQualifications
-    compensation_and_benefits: CompensationAndBenefits
-    additional_information: AdditionalInformation
+    metadata: Optional[JobMetadata] = None
+    company_overview: Optional[CompanyOverview] = None
+    role_summary: RoleSummary  # Required field
+    responsibilities_and_qualifications: Optional[ResponsibilitiesAndQualifications] = None
+    compensation_and_benefits: Optional[CompensationAndBenefits] = None
+    additional_information: Optional[AdditionalInformation] = None
 
-class GradingSection(BaseModel):
-    """
-    Evaluates the quality and completeness of extracted job description sections.
-    Provides both quantitative scoring and qualitative feedback to guide improvements.
-    
-    Quality scores range from 0.0 to 1.0:
-    - 0.0-0.3: Major issues or missing critical information
-    - 0.3-0.6: Present but needs significant improvement
-    - 0.6-0.8: Good but has room for improvement
-    - 0.8-1.0: Excellent, meets or exceeds expectations
-    """
-    section_name: str = Field(
-        ...,
-        description="Name of the section being evaluated (e.g., 'company_overview', 'role_summary')"
-    )
-    
-    quality_score: float = Field(
-        ...,
-        ge=0.0,
-        le=1.0,
-        description="Overall quality score considering accuracy, completeness, and clarity. "
-                   "Higher scores (>0.8) indicate excellent extraction requiring no improvements, "
-                   "while lower scores suggest room for enhancement."
-    )
-    
-    needs_improvement: bool = Field(
-        ...,
-        description="Indicates whether additional relevant information exists in the source text "
-                   "that wasn't successfully extracted. True means there's untapped source data "
-                   "that could enhance this section, False means we've extracted all available "
-                   "relevant information."
-    )
-    
-    feedback: Optional[str] = Field(
-        None,
-        description="Specific observations about quality issues, missing information, "
-                   "or potential improvements. Should be actionable and specific to the section."
-    )
 
 class GraderOutput(BaseModel):
     """Simple grader output with just score and feedback."""
