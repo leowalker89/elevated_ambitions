@@ -4,13 +4,18 @@ Provides singleton connection manager and collection access functions.
 """
 
 from typing import Optional
-from pymongo.mongo_client import MongoClient
+from motor.motor_asyncio import AsyncIOMotorClient
 from pymongo.server_api import ServerApi
 from pymongo.collection import Collection
 from pymongo.database import Database
 from dotenv import load_dotenv
 import os
-from logfire import Logfire
+from logfire import Logfire, configure
+from os import getenv
+from backend.logging_config import setup_logging
+import asyncio
+
+setup_logging()  # Call this before any logger usage
 
 # Initialize logging
 logger = Logfire()
@@ -23,7 +28,7 @@ class MongoDB:
     Ensures single database connection is maintained throughout the application.
     """
     _instance: Optional['MongoDB'] = None
-    _client: Optional[MongoClient] = None
+    _client: Optional[AsyncIOMotorClient] = None
     
     def __new__(cls):
         """Singleton pattern to ensure single database connection"""
@@ -31,59 +36,42 @@ class MongoDB:
             cls._instance = super(MongoDB, cls).__new__(cls)
         return cls._instance
     
-    def __init__(self):
-        """Initialize MongoDB connection if not already initialized"""
+    async def connect(self):
+        """Async connection initialization"""
         if self._client is None:
-            self._connect()
+            await self._connect()
     
-    def _connect(self):
-        """
-        Establish connection to MongoDB using credentials from environment variables.
-        """
+    async def _connect(self):
+        """Async MongoDB connection setup"""
         load_dotenv()
         
         uri = os.getenv('MONGODB_URI')
         if not uri:
             raise ValueError("MongoDB URI not found in environment variables")
         
-        # Debug log to see what URI we're using (with masked password)
         masked_uri = uri.replace(os.getenv('MONGODB_PASSWORD', ''), '***')
         logger.info(f"Attempting to connect with URI: {masked_uri}")
         
         try:
-            self._client = MongoClient(uri, 
-                                     server_api=ServerApi('1'),
-                                     serverSelectionTimeoutMS=5000)  # 5 second timeout
+            self._client = AsyncIOMotorClient(
+                uri,
+                server_api=ServerApi('1'),
+                serverSelectionTimeoutMS=5000
+            )
+            
             # Test connection
-            self._client.admin.command('ping')
+            await self._client.admin.command('ping')
             logger.info("Successfully connected to MongoDB!")
+            
         except Exception as e:
             logger.error(f"Failed to connect to MongoDB: {str(e)}")
-            logger.error(f"Error type: {type(e)}")
             raise
     
-    def get_collection(self, db_name: str, collection_name: str) -> Collection:
-        """
-        Get a MongoDB collection.
-        
-        Args:
-            db_name (str): Name of the database
-            collection_name (str): Name of the collection
-            
-        Returns:
-            Collection: MongoDB collection object
-            
-        Raises:
-            ConnectionError: If MongoDB connection cannot be established
-        """
+    async def get_collection(self, db_name: str, collection_name: str):
+        """Get MongoDB collection with async connection handling"""
         if not self._client:
-            self._connect()
-            
-        if not self._client:  # If still None after connection attempt
-            raise ConnectionError("Failed to establish MongoDB connection")
-            
-        db: Database = self._client.get_database(db_name)
-        return db.get_collection(collection_name)
+            await self.connect()
+        return self._client[db_name][collection_name]
     
     def close(self):
         """Close MongoDB connection and cleanup resources."""
@@ -92,28 +80,28 @@ class MongoDB:
             self._client = None
             logger.info("MongoDB connection closed")
 
-# Create a global instance
+# Create singleton instance
 mongodb = MongoDB()
 
-def get_jobs_collection() -> Collection:
+async def get_jobs_collection():
     """
     Get the jobs collection from MongoDB.
     
     Returns:
         Collection: MongoDB collection for storing job listings
     """
-    return mongodb.get_collection('jobs_db', 'job_listings')
+    return await mongodb.get_collection('jobs_db', 'job_listings')
 
-def get_searches_collection() -> Collection:
+async def get_searches_collection():
     """
     Get the searches collection from MongoDB.
     
     Returns:
         Collection: MongoDB collection for storing job search metadata
     """
-    return mongodb.get_collection('jobs_db', 'job_searches')
+    return await mongodb.get_collection('jobs_db', 'job_searches')
 
-def get_elevated_jobs_collection() -> Collection:
+async def get_elevated_jobs_collection():
     """
     Get the elevated jobs collection from MongoDB.
     Stores standardized and enriched job descriptions after processing.
@@ -121,6 +109,6 @@ def get_elevated_jobs_collection() -> Collection:
     Returns:
         Collection: MongoDB collection for storing processed job listings
     """
-    return mongodb.get_collection('jobs_db', 'elevated_jobs')
+    return await mongodb.get_collection('jobs_db', 'elevated_jobs')
 
 __all__ = ['mongodb', 'get_jobs_collection', 'get_searches_collection', 'get_elevated_jobs_collection'] 

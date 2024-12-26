@@ -9,10 +9,10 @@ services:
       LANGCHAIN_API_KEY: ${LANGCHAIN_API_KEY}
       LANGCHAIN_PROJECT: ${LANGCHAIN_PROJECT}
       LANGCHAIN_TRACING_V2: ${LANGCHAIN_TRACING_V2}
-      PYTHONPATH: /app/backend
+      PYTHONPATH: /app
       LOGFIRE_IGNORE_NO_CONFIG: 1
     volumes:
-      - ./backend:/app/backend
+      - .:/app
     tty: true
     stdin_open: true
     depends_on:
@@ -27,6 +27,21 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD=${MONGODB_PASSWORD}
     volumes:
       - mongodb_data:/data/db
+
+  elevate-jobs:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+    environment:
+      MONGODB_URI: ${MONGODB_URI}
+      GROQ_API_KEY: ${GROQ_API_KEY}
+      LANGCHAIN_API_KEY: ${LANGCHAIN_API_KEY}
+      LANGCHAIN_PROJECT: ${LANGCHAIN_PROJECT}
+      LANGCHAIN_TRACING_V2: ${LANGCHAIN_TRACING_V2}
+      PYTHONPATH: /app
+    command: python backend/workflows/search_jobs_to_mongodb.py
 
 volumes:
   mongodb_data: 

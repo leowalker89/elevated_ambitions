@@ -299,28 +299,44 @@ name = "elevated-ambitions"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
+    { name = "aiohttp" },
+    { name = "fastapi" },
+    { name = "httpx" },
     { name = "langchain" },
     { name = "langchain-groq" },
     { name = "langgraph" },
     { name = "logfire" },
+    { name = "motor" },
+    { name = "nest-asyncio" },
+    { name = "pydantic" },
+    { name = "pydantic-settings" },
     { name = "pymongo" },
     { name = "pytest" },
     { name = "pytest-asyncio" },
     { name = "python-dotenv" },
     { name = "tqdm" },
+    { name = "uv" },
 ]
 
 [package.metadata]
 requires-dist = [
+    { name = "aiohttp" },
+    { name = "fastapi" },
+    { name = "httpx" },
     { name = "langchain" },
     { name = "langchain-groq" },
     { name = "langgraph", specifier = ">=0.2.59" },
     { name = "logfire" },
+    { name = "motor", specifier = ">=3.3.0" },
+    { name = "nest-asyncio" },
+    { name = "pydantic", specifier = ">=2.0.0" },
+    { name = "pydantic-settings", specifier = ">=2.0.0" },
     { name = "pymongo" },
     { name = "pytest" },
     { name = "pytest-asyncio" },
     { name = "python-dotenv" },
     { name = "tqdm" },
+    { name = "uv" },
 ]
 
 [[package]]
@@ -339,6 +355,20 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/8c/e3/7d45f492c2c4a0e8e0fad57d081a7c8a0286cdd86372b070cca1ec0caa1e/executing-2.1.0.tar.gz", hash = "sha256:8ea27ddd260da8150fa5a708269c4a10e76161e2496ec3e587da9e3c0fe4b9ab", size = 977485 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/b5/fd/afcd0496feca3276f509df3dbd5dae726fcc756f1a08d9e25abe1733f962/executing-2.1.0-py2.py3-none-any.whl", hash = "sha256:8d63781349375b5ebccc3142f4b30350c0cd9c79f921cde38be2be4637e98eaf", size = 25805 },
+]
+
+[[package]]
+name = "fastapi"
+version = "0.115.6"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "pydantic" },
+    { name = "starlette" },
+    { name = "typing-extensions" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/93/72/d83b98cd106541e8f5e5bfab8ef2974ab45a62e8a6c5b5e6940f26d2ed4b/fastapi-0.115.6.tar.gz", hash = "sha256:9ec46f7addc14ea472958a96aae5b5de65f39721a46aaf5705c480d9a8b76654", size = 301336 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/52/b3/7e4df40e585df024fac2f80d1a2d579c854ac37109675db2b0cc22c0bb9e/fastapi-0.115.6-py3-none-any.whl", hash = "sha256:e9240b29e36fa8f4bb7290316988e90c381e5092e0cbe84e7818cc3713bcf305", size = 94843 },
 ]
 
 [[package]]
@@ -766,6 +796,18 @@ wheels = [
 ]
 
 [[package]]
+name = "motor"
+version = "3.6.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "pymongo" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/6a/d1/06af0527fd02d49b203db70dba462e47275a3c1094f830fdaf090f0cb20c/motor-3.6.0.tar.gz", hash = "sha256:0ef7f520213e852bf0eac306adf631aabe849227d8aec900a2612512fb9c5b8d", size = 278447 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/b4/c2/bba4dce0dc56e49d95c270c79c9330ed19e6b71a2a633aecf53e7e1f04c9/motor-3.6.0-py3-none-any.whl", hash = "sha256:9f07ed96f1754963d4386944e1b52d403a5350c687edc60da487d66f98dbf894", size = 74802 },
+]
+
+[[package]]
 name = "msgpack"
 version = "1.1.0"
 source = { registry = "https://pypi.org/simple" }
@@ -913,6 +955,15 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/86/99/e82e1a275d8b1ea16d3a251474262258dbbe41c05cce0c01bceda1fc8ea5/multidict-6.1.0-cp39-cp39-win32.whl", hash = "sha256:1ca0083e80e791cffc6efce7660ad24af66c8d4079d2a750b29001b53ff59ada", size = 26421 },
     { url = "https://files.pythonhosted.org/packages/86/1c/9fa630272355af7e4446a2c7550c259f11ee422ab2d30ff90a0a71cf3d9e/multidict-6.1.0-cp39-cp39-win_amd64.whl", hash = "sha256:aa466da5b15ccea564bdab9c89175c762bc12825f4659c11227f515cee76fa4a", size = 28791 },
     { url = "https://files.pythonhosted.org/packages/99/b7/b9e70fde2c0f0c9af4cc5277782a89b66d35948ea3369ec9f598358c3ac5/multidict-6.1.0-py3-none-any.whl", hash = "sha256:48e171e52d1c4d33888e529b999e5900356b9ae588c2f09a52dcefb158b27506", size = 10051 },
+]
+
+[[package]]
+name = "nest-asyncio"
+version = "1.6.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/83/f8/51569ac65d696c8ecbee95938f89d4abf00f47d58d48f6fbabfe8f0baefe/nest_asyncio-1.6.0.tar.gz", hash = "sha256:6f172d5449aca15afd6c646851f4e31e02c598d553a667e38cafa997cfec55fe", size = 7418 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/a0/c4/c2971a3ba4c6103a3d10c4b0f24f461ddc027f0f09763220cf35ca1401b3/nest_asyncio-1.6.0-py3-none-any.whl", hash = "sha256:87af6efd6b5e897c81050477ef65c62e2b2f35d51703cae01aff2905b1852e1c", size = 5195 },
 ]
 
 [[package]]
@@ -1428,6 +1479,19 @@ wheels = [
 ]
 
 [[package]]
+name = "pydantic-settings"
+version = "2.7.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "pydantic" },
+    { name = "python-dotenv" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/86/41/19b62b99e7530cfa1d6ccd16199afd9289a12929bef1a03aa4382b22e683/pydantic_settings-2.7.0.tar.gz", hash = "sha256:ac4bfd4a36831a48dbf8b2d9325425b549a0a6f18cea118436d728eb4f1c4d66", size = 79743 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/f9/00/57b4540deb5c3a39ba689bb519a4e03124b24ab8589e618be4aac2c769bd/pydantic_settings-2.7.0-py3-none-any.whl", hash = "sha256:e00c05d5fa6cbbb227c84bd7487c5c1065084119b750df7c8c1a554aed236eb5", size = 29549 },
+]
+
+[[package]]
 name = "pygments"
 version = "2.18.0"
 source = { registry = "https://pypi.org/simple" }
@@ -1438,60 +1502,60 @@ wheels = [
 
 [[package]]
 name = "pymongo"
-version = "4.10.1"
+version = "4.9.2"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "dnspython" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/1a/35/b62a3139f908c68b69aac6a6a3f8cc146869de0a7929b994600e2c587c77/pymongo-4.10.1.tar.gz", hash = "sha256:a9de02be53b6bb98efe0b9eda84ffa1ec027fcb23a2de62c4f941d9a2f2f3330", size = 1903902 }
+sdist = { url = "https://files.pythonhosted.org/packages/fb/43/d5e8993bd43e6f9cbe985e8ae1398eb73309e88694ac2ea618eacbc9cea2/pymongo-4.9.2.tar.gz", hash = "sha256:3e63535946f5df7848307b9031aa921f82bb0cbe45f9b0c3296f2173f9283eb0", size = 1889366 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/c1/ca/f56b1dd84541de658d246f86828be27e32285f2151fab97efbce1db3ed57/pymongo-4.10.1-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:e699aa68c4a7dea2ab5a27067f7d3e08555f8d2c0dc6a0c8c60cfd9ff2e6a4b1", size = 835459 },
-    { url = "https://files.pythonhosted.org/packages/97/01/fe4ee34b33c6863be6a09d1e805ceb1122d9cd5d4a5d1664e360b91adf7e/pymongo-4.10.1-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:70645abc714f06b4ad6b72d5bf73792eaad14e3a2cfe29c62a9c81ada69d9e4b", size = 835716 },
-    { url = "https://files.pythonhosted.org/packages/46/ff/9eb21c1d5861729ae1c91669b02f5bfbd23221ba9809fb97fade761f3f3b/pymongo-4.10.1-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:ae2fd94c9fe048c94838badcc6e992d033cb9473eb31e5710b3707cba5e8aee2", size = 1407173 },
-    { url = "https://files.pythonhosted.org/packages/e5/d9/8cf042449d6804e00e38d3bb138b0e9acb8a8e0c9dd9dd989ffffd481c3b/pymongo-4.10.1-cp310-cp310-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:5ded27a4a5374dae03a92e084a60cdbcecd595306555bda553b833baf3fc4868", size = 1456455 },
-    { url = "https://files.pythonhosted.org/packages/37/9a/da0d121f98c1413853e1172e2095fe77c1629c83a1db107d45a37ca935c2/pymongo-4.10.1-cp310-cp310-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:1ecc2455e3974a6c429687b395a0bc59636f2d6aedf5785098cf4e1f180f1c71", size = 1433360 },
-    { url = "https://files.pythonhosted.org/packages/7d/6d/50480f0452e2fb59256d9d641d192366c0079920c36851b818ebeff0cec9/pymongo-4.10.1-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:a920fee41f7d0259f5f72c1f1eb331bc26ffbdc952846f9bd8c3b119013bb52c", size = 1410758 },
-    { url = "https://files.pythonhosted.org/packages/cd/8f/b83b9910c54f63bfff34305074e79cd08cf5e12dda22d1a2b4ad009b32b3/pymongo-4.10.1-cp310-cp310-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:e0a15665b2d6cf364f4cd114d62452ce01d71abfbd9c564ba8c74dcd7bbd6822", size = 1380257 },
-    { url = "https://files.pythonhosted.org/packages/ed/e3/8f381b576e5f912cf0fe34218c6b0ef23d7afdef13fed592900fb52f0ed4/pymongo-4.10.1-cp310-cp310-win32.whl", hash = "sha256:29e1c323c28a4584b7095378ff046815e39ff82cdb8dc4cc6dfe3acf6f9ad1f8", size = 812324 },
-    { url = "https://files.pythonhosted.org/packages/ab/14/1cae5359e2c4677856527a2965c999c23f596cced4b7828d880cb8fc0f54/pymongo-4.10.1-cp310-cp310-win_amd64.whl", hash = "sha256:88dc4aa45f8744ccfb45164aedb9a4179c93567bbd98a33109d7dc400b00eb08", size = 826774 },
-    { url = "https://files.pythonhosted.org/packages/e4/a3/d6403ec53fa2fe922b4a5c86388ea5fada01dd51d803e17bb2a7c9cda839/pymongo-4.10.1-cp311-cp311-macosx_10_9_x86_64.whl", hash = "sha256:57ee6becae534e6d47848c97f6a6dff69e3cce7c70648d6049bd586764febe59", size = 889238 },
-    { url = "https://files.pythonhosted.org/packages/29/a2/9643450424bcf241e80bb713497ec2e3273c183d548b4eca357f75d71885/pymongo-4.10.1-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:6f437a612f4d4f7aca1812311b1e84477145e950fdafe3285b687ab8c52541f3", size = 889504 },
-    { url = "https://files.pythonhosted.org/packages/ec/40/4759984f34415509e9111be8ee863034611affdc1e0b41016c9d53b2f1b3/pymongo-4.10.1-cp311-cp311-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:1a970fd3117ab40a4001c3dad333bbf3c43687d90f35287a6237149b5ccae61d", size = 1649069 },
-    { url = "https://files.pythonhosted.org/packages/56/0f/b6e917478a3ada81e768475516cd544982cc42cbb7d3be325182768139e1/pymongo-4.10.1-cp311-cp311-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:7c4d0e7cd08ef9f8fbf2d15ba281ed55604368a32752e476250724c3ce36c72e", size = 1714927 },
-    { url = "https://files.pythonhosted.org/packages/56/c5/4237d94dfa19ebdf9a92b1071e2139c91f48908c5782e592c571c33b67ab/pymongo-4.10.1-cp311-cp311-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:ca6f700cff6833de4872a4e738f43123db34400173558b558ae079b5535857a4", size = 1683454 },
-    { url = "https://files.pythonhosted.org/packages/9a/16/dbffca9d4ad66f2a325c280f1177912fa23235987f7b9033e283da889b7a/pymongo-4.10.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:cec237c305fcbeef75c0bcbe9d223d1e22a6e3ba1b53b2f0b79d3d29c742b45b", size = 1653840 },
-    { url = "https://files.pythonhosted.org/packages/2b/4d/21df934ef5cf8f0e587bac922a129e13d4c0346c54e9bf2371b90dd31112/pymongo-4.10.1-cp311-cp311-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:b3337804ea0394a06e916add4e5fac1c89902f1b6f33936074a12505cab4ff05", size = 1613233 },
-    { url = "https://files.pythonhosted.org/packages/24/07/dd9c3db30e754680606295d5574521956898005db0629411a89163cc6eee/pymongo-4.10.1-cp311-cp311-win32.whl", hash = "sha256:778ac646ce6ac1e469664062dfe9ae1f5c9961f7790682809f5ec3b8fda29d65", size = 857331 },
-    { url = "https://files.pythonhosted.org/packages/02/68/b71c4106d03eef2482eade440c6f5737c2a4a42f6155726009f80ea38d06/pymongo-4.10.1-cp311-cp311-win_amd64.whl", hash = "sha256:9df4ab5594fdd208dcba81be815fa8a8a5d8dedaf3b346cbf8b61c7296246a7a", size = 876473 },
-    { url = "https://files.pythonhosted.org/packages/10/d1/60ad99fe3f64d45e6c71ac0e3078e88d9b64112b1bae571fc3707344d6d1/pymongo-4.10.1-cp312-cp312-macosx_10_13_x86_64.whl", hash = "sha256:fbedc4617faa0edf423621bb0b3b8707836687161210d470e69a4184be9ca011", size = 943356 },
-    { url = "https://files.pythonhosted.org/packages/ca/9b/21d4c6b4ee9c1fa9691c68dc2a52565e0acb644b9e95148569b4736a4ebd/pymongo-4.10.1-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:7bd26b2aec8ceeb95a5d948d5cc0f62b0eb6d66f3f4230705c1e3d3d2c04ec76", size = 943142 },
-    { url = "https://files.pythonhosted.org/packages/07/af/691b7454e219a8eb2d1641aecedd607e3a94b93650c2011ad8a8fd74ef9f/pymongo-4.10.1-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:fb104c3c2a78d9d85571c8ac90ec4f95bca9b297c6eee5ada71fabf1129e1674", size = 1909129 },
-    { url = "https://files.pythonhosted.org/packages/0c/74/fd75d5ad4181d6e71ce0fca32404fb71b5046ac84d9a1a2f0862262dd032/pymongo-4.10.1-cp312-cp312-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:4924355245a9c79f77b5cda2db36e0f75ece5faf9f84d16014c0a297f6d66786", size = 1987763 },
-    { url = "https://files.pythonhosted.org/packages/8a/56/6d3d0ef63c6d8cb98c7c653a3a2e617675f77a95f3853851d17a7664876a/pymongo-4.10.1-cp312-cp312-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:11280809e5dacaef4971113f0b4ff4696ee94cfdb720019ff4fa4f9635138252", size = 1950821 },
-    { url = "https://files.pythonhosted.org/packages/70/ed/1603fa0c0e51444752c3fa91f16c3a97e6d92eb9fe5e553dae4f18df16f6/pymongo-4.10.1-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:e5d55f2a82e5eb23795f724991cac2bffbb1c0f219c0ba3bf73a835f97f1bb2e", size = 1912247 },
-    { url = "https://files.pythonhosted.org/packages/c1/66/e98b2308971d45667cb8179d4d66deca47336c90663a7e0527589f1038b7/pymongo-4.10.1-cp312-cp312-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:e974ab16a60be71a8dfad4e5afccf8dd05d41c758060f5d5bda9a758605d9a5d", size = 1862230 },
-    { url = "https://files.pythonhosted.org/packages/6c/80/ba9b7ed212a5f8cf8ad7037ed5bbebc1c587fc09242108f153776e4a338b/pymongo-4.10.1-cp312-cp312-win32.whl", hash = "sha256:544890085d9641f271d4f7a47684450ed4a7344d6b72d5968bfae32203b1bb7c", size = 903045 },
-    { url = "https://files.pythonhosted.org/packages/76/8b/5afce891d78159912c43726fab32641e3f9718f14be40f978c148ea8db48/pymongo-4.10.1-cp312-cp312-win_amd64.whl", hash = "sha256:dcc07b1277e8b4bf4d7382ca133850e323b7ab048b8353af496d050671c7ac52", size = 926686 },
-    { url = "https://files.pythonhosted.org/packages/83/76/df0fd0622a85b652ad0f91ec8a0ebfd0cb86af6caec8999a22a1f7481203/pymongo-4.10.1-cp313-cp313-macosx_10_13_x86_64.whl", hash = "sha256:90bc6912948dfc8c363f4ead54d54a02a15a7fee6cfafb36dc450fc8962d2cb7", size = 996981 },
-    { url = "https://files.pythonhosted.org/packages/4c/39/fa50531de8d1d8af8c253caeed20c18ccbf1de5d970119c4a42c89f2bd09/pymongo-4.10.1-cp313-cp313-macosx_11_0_arm64.whl", hash = "sha256:594dd721b81f301f33e843453638e02d92f63c198358e5a0fa8b8d0b1218dabc", size = 996769 },
-    { url = "https://files.pythonhosted.org/packages/bf/50/6936612c1b2e32d95c30e860552d3bc9e55cfa79a4f73b73225fa05a028c/pymongo-4.10.1-cp313-cp313-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:0783e0c8e95397c84e9cf8ab092ab1e5dd7c769aec0ef3a5838ae7173b98dea0", size = 2169159 },
-    { url = "https://files.pythonhosted.org/packages/78/8c/45cb23096e66c7b1da62bb8d9c7ac2280e7c1071e13841e7fb71bd44fd9f/pymongo-4.10.1-cp313-cp313-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:6fb6a72e88df46d1c1040fd32cd2d2c5e58722e5d3e31060a0393f04ad3283de", size = 2260569 },
-    { url = "https://files.pythonhosted.org/packages/29/b6/e5ec697087e527a6a15c5f8daa5bcbd641edb8813487345aaf963d3537dc/pymongo-4.10.1-cp313-cp313-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:2e3a593333e20c87415420a4fb76c00b7aae49b6361d2e2205b6fece0563bf40", size = 2218142 },
-    { url = "https://files.pythonhosted.org/packages/ad/8a/c0b45bee0f0c57732c5c36da5122c1796efd5a62d585fbc504e2f1401244/pymongo-4.10.1-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:72e2ace7456167c71cfeca7dcb47bd5dceda7db2231265b80fc625c5e8073186", size = 2170623 },
-    { url = "https://files.pythonhosted.org/packages/3b/26/6c0a5360a571df24c9bfbd51b1dae279f4f0c511bdbc0906f6df6d1543fa/pymongo-4.10.1-cp313-cp313-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:8ad05eb9c97e4f589ed9e74a00fcaac0d443ccd14f38d1258eb4c39a35dd722b", size = 2111112 },
-    { url = "https://files.pythonhosted.org/packages/38/bc/5b91b728e1cf505d931f04e24cbac71ae519523785570ed046cdc31e6efc/pymongo-4.10.1-cp313-cp313-win32.whl", hash = "sha256:ee4c86d8e6872a61f7888fc96577b0ea165eb3bdb0d841962b444fa36001e2bb", size = 948727 },
-    { url = "https://files.pythonhosted.org/packages/0d/2a/7c24a6144eaa06d18ed52822ea2b0f119fd9267cd1abbb75dae4d89a3803/pymongo-4.10.1-cp313-cp313-win_amd64.whl", hash = "sha256:45ee87a4e12337353242bc758accc7fb47a2f2d9ecc0382a61e64c8f01e86708", size = 976873 },
-    { url = "https://files.pythonhosted.org/packages/39/69/a13a61fd9a19e659cb43cb98240a75dab2f8e7b60bee568c309a123f8edc/pymongo-4.10.1-cp39-cp39-macosx_10_9_x86_64.whl", hash = "sha256:15b1492cc5c7cd260229590be7218261e81684b8da6d6de2660cf743445500ce", size = 781650 },
-    { url = "https://files.pythonhosted.org/packages/14/13/a5a3da69ee146bac81baacc7b27995849bfbb89eaabfb3d19824c7056fb4/pymongo-4.10.1-cp39-cp39-macosx_11_0_arm64.whl", hash = "sha256:95207503c41b97e7ecc7e596d84a61f441b4935f11aa8332828a754e7ada8c82", size = 781929 },
-    { url = "https://files.pythonhosted.org/packages/b0/65/118bc20fc66451ae4b8ceafbd9aab1168bb13cf4e5699b81807bb911a443/pymongo-4.10.1-cp39-cp39-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:bb99f003c720c6d83be02c8f1a7787c22384a8ca9a4181e406174db47a048619", size = 1167200 },
-    { url = "https://files.pythonhosted.org/packages/d1/4a/19c3d45659835f814efef8b250456923899cc7542c52f8beb1a6a164106f/pymongo-4.10.1-cp39-cp39-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:f2bc1ee4b1ca2c4e7e6b7a5e892126335ec8d9215bcd3ac2fe075870fefc3358", size = 1200021 },
-    { url = "https://files.pythonhosted.org/packages/1c/03/69cee6f23463251a8f6de6670fb665e2531cc0df500d61150e57d1aedf70/pymongo-4.10.1-cp39-cp39-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:93a0833c10a967effcd823b4e7445ec491f0bf6da5de0ca33629c0528f42b748", size = 1185518 },
-    { url = "https://files.pythonhosted.org/packages/00/58/01d8b3b374e45931581364752bf7a4693e9c7422704f81e6e91ffa42c38d/pymongo-4.10.1-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:0f56707497323150bd2ed5d63067f4ffce940d0549d4ea2dfae180deec7f9363", size = 1169799 },
-    { url = "https://files.pythonhosted.org/packages/be/6f/9aa0ba2f4cfa4c30c962bd1f5a38b2eb95b23e3965918d211da82ebaacf6/pymongo-4.10.1-cp39-cp39-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:409ab7d6c4223e5c85881697f365239dd3ed1b58f28e4124b846d9d488c86880", size = 1149344 },
-    { url = "https://files.pythonhosted.org/packages/fc/af/40f0112605f75f5ae5da554b2f779a83c40ecf2298c57e120e6d7bfcff65/pymongo-4.10.1-cp39-cp39-manylinux_2_5_i686.manylinux1_i686.whl", hash = "sha256:dac78a650dc0637d610905fd06b5fa6419ae9028cf4d04d6a2657bc18a66bbce", size = 1134277 },
-    { url = "https://files.pythonhosted.org/packages/a1/92/9a4afaf02d4d633c3211b7535e6bfbb2527524ca8ac8039b8d7eb3c765eb/pymongo-4.10.1-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.whl", hash = "sha256:1ec3fa88b541e0481aff3c35194c9fac96e4d57ec5d1c122376000eb28c01431", size = 1167588 },
-    { url = "https://files.pythonhosted.org/packages/29/de/3c23e7739b0d0dafa4d802e9773011cf54e305c7cb788a52d50c3ef585d2/pymongo-4.10.1-cp39-cp39-win32.whl", hash = "sha256:e0e961923a7b8a1c801c43552dcb8153e45afa41749d9efbd3a6d33f45489f7a", size = 767325 },
-    { url = "https://files.pythonhosted.org/packages/36/d4/49198168f296838c49d732743ae073f9ca9e8f65f15f5209637456892968/pymongo-4.10.1-cp39-cp39-win_amd64.whl", hash = "sha256:dabe8bf1ad644e6b93f3acf90ff18536d94538ca4d27e583c6db49889e98e48f", size = 777078 },
+    { url = "https://files.pythonhosted.org/packages/38/af/1ce26b971e520de621239842f2be302749eb752a5cb29dd253f4c210eb0a/pymongo-4.9.2-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:ab8d54529feb6e29035ba8f0570c99ad36424bc26486c238ad7ce28597bc43c8", size = 833709 },
+    { url = "https://files.pythonhosted.org/packages/a6/bd/7bc8224ae96fd9ffe8b2a193469200b9c75787178c5b1955bd20e5d024c7/pymongo-4.9.2-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:f928bdc152a995cbd0b563fab201b2df873846d11f7a41d1f8cc8a01b35591ab", size = 833974 },
+    { url = "https://files.pythonhosted.org/packages/87/2e/3cc96aec7a1d6151677bb108af606ea220205a47255ed53255bfe1d8f31f/pymongo-4.9.2-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:b6e7251d59fa3dcbb1399a71a3aec63768cebc6b22180b671601c2195fe1f90a", size = 1405440 },
+    { url = "https://files.pythonhosted.org/packages/e8/9c/2d5db2fcabc873daead275729c17ddeb2b437010858fe101e8d59a276209/pymongo-4.9.2-cp310-cp310-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:0e759ed0459e7264a11b6896016f616341a8e4c6ab7f71ae651bd21ffc7e9524", size = 1454720 },
+    { url = "https://files.pythonhosted.org/packages/6f/84/b382e7f817fd39dcd02ae69e21afd538251acf5de1904606a9908d8895fe/pymongo-4.9.2-cp310-cp310-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:f3fc60f242191840ccf02b898bc615b5141fbb70064f38f7e60fcaa35d3b5efd", size = 1431625 },
+    { url = "https://files.pythonhosted.org/packages/87/f5/653f9af6a7625353138bded4548a5a48729352b963fc2a059e07241b37c2/pymongo-4.9.2-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:6c798351666ac97a0ddaa823689061c3af949c2d6acf7fb2d9ab0a7f465ced79", size = 1409027 },
+    { url = "https://files.pythonhosted.org/packages/36/26/f4159209cf6229ce0a5ac37f093dab49495c51daad8ca835279f0058b060/pymongo-4.9.2-cp310-cp310-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:aac78b5fdd49ed8cae49adf76befacb02293a23b412676775c4715148e166d85", size = 1378524 },
+    { url = "https://files.pythonhosted.org/packages/57/3c/78c60e721a975b836922467410dd4b9616ac84f096eec00f7bde9e889b2b/pymongo-4.9.2-cp310-cp310-win32.whl", hash = "sha256:bf77bf175c315e299a91332c2bbebc097c4d4fcc8713e513a9861684aa39023a", size = 810564 },
+    { url = "https://files.pythonhosted.org/packages/71/cf/790c8da7fdd55e5e824b08eaf63355732bbf278ebcb98615e723feb05702/pymongo-4.9.2-cp310-cp310-win_amd64.whl", hash = "sha256:c42b5aad8971256365bfd0a545fb1c7a199c93db80decd298ea2f987419e2a6d", size = 825019 },
+    { url = "https://files.pythonhosted.org/packages/a8/b4/7af80304a0798526fac959e3de651b0747472c049c8b89a6c15fed2026f6/pymongo-4.9.2-cp311-cp311-macosx_10_9_x86_64.whl", hash = "sha256:99e40f44877b32bf4b3c46ceed2228f08c222cf7dec8a4366dd192a1429143fa", size = 887499 },
+    { url = "https://files.pythonhosted.org/packages/33/ee/5389229774f842bd92a123fd3ea4f2d72b474bde9315ff00e889fe104a0d/pymongo-4.9.2-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:6f6834d575ed87edc7dfcab4501d961b6a423b3839edd29ecb1382eee7736777", size = 887755 },
+    { url = "https://files.pythonhosted.org/packages/d4/fd/3f0ae0fd3a7049ec67ab8f952020bc9fad841791d52d8c51405bd91b3c9b/pymongo-4.9.2-cp311-cp311-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:3010018f5672e5b7e8d096dea9f1ea6545b05345ff0eb1754f6ee63785550773", size = 1647336 },
+    { url = "https://files.pythonhosted.org/packages/00/b7/0472d51778e9e22b2ffd5ae9a401888525c4872cb2073f1bff8d5ae9659b/pymongo-4.9.2-cp311-cp311-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:69394ee9f0ce38ff71266bad01b7e045cd75e58500ebad5d72187cbabf2e652a", size = 1713193 },
+    { url = "https://files.pythonhosted.org/packages/8c/ac/aa41cb291107bb16bae286d7b9f2c868e393765830bc173609ae4dc9a3ae/pymongo-4.9.2-cp311-cp311-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:87b18094100f21615d9db99c255dcd9e93e476f10fb03c1d3632cf4b82d201d2", size = 1681720 },
+    { url = "https://files.pythonhosted.org/packages/dc/70/ac12eb58bd46a7254daaa4d39e7c4109983ee2227dac44df6587954fe345/pymongo-4.9.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:3039e093d28376d6a54bdaa963ca12230c8a53d7b19c8e6368e19bcfbd004176", size = 1652109 },
+    { url = "https://files.pythonhosted.org/packages/d3/20/38f71e0f1c7878b287305b2965cebe327fc5626ecca83ea52a272968cbe2/pymongo-4.9.2-cp311-cp311-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:6ab42d9ee93fe6b90020c42cba5bfb43a2b4660951225d137835efc21940da48", size = 1611503 },
+    { url = "https://files.pythonhosted.org/packages/9b/4c/d3b26e1040c9538b9c8aed005ec18af7515c6dd3091aabfbf6c30a3b3b1a/pymongo-4.9.2-cp311-cp311-win32.whl", hash = "sha256:a663ca60e187a248d370c58961e40f5463077d2b43831eb92120ea28a79ecf96", size = 855570 },
+    { url = "https://files.pythonhosted.org/packages/40/3d/7de1a4cf51bf2b10bb9f43ffa208acad0d64c18994ca8d83f490edef6834/pymongo-4.9.2-cp311-cp311-win_amd64.whl", hash = "sha256:24e7b6887bbfefd05afed26a99a2c69459e2daa351a43a410de0d6c0ee3cce4e", size = 874715 },
+    { url = "https://files.pythonhosted.org/packages/a1/08/7d95aab0463dc5a2c460a0b4e50a45a743afbe20986f47f87a9a88f43c0c/pymongo-4.9.2-cp312-cp312-macosx_10_13_x86_64.whl", hash = "sha256:8083bbe8cb10bb33dca4d93f8223dd8d848215250bb73867374650bac5fe69e1", size = 941617 },
+    { url = "https://files.pythonhosted.org/packages/bb/28/40613d8d97fc33bf2b9187446a6746925623aa04a9a27c9b058e97076f7a/pymongo-4.9.2-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:a1b8c636bf557c7166e3799bbf1120806ca39e3f06615b141c88d9c9ceae4d8c", size = 941394 },
+    { url = "https://files.pythonhosted.org/packages/df/b2/7f1a0d75f538c0dcaa004ea69e28706fa3ca72d848e0a5a7dafd30939fff/pymongo-4.9.2-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:8aac5dce28454f47576063fbad31ea9789bba67cab86c95788f97aafd810e65b", size = 1907396 },
+    { url = "https://files.pythonhosted.org/packages/ba/70/9304bae47a361a4b12adb5be714bad41478c0e5bc3d6cf403b328d6398a0/pymongo-4.9.2-cp312-cp312-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:d1d5e7123af1fddf15b2b53e58f20bf5242884e671bcc3860f5e954fe13aeddd", size = 1986029 },
+    { url = "https://files.pythonhosted.org/packages/ae/51/ac0378d001995c4a705da64a4a2b8e1732f95de5080b752d69f452930cc7/pymongo-4.9.2-cp312-cp312-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:fe97c847b56d61e533a7af0334193d6b28375b9189effce93129c7e4733794a9", size = 1949088 },
+    { url = "https://files.pythonhosted.org/packages/1a/30/e93dc808039dc29fc47acee64f128aa650aacae3e4b57b68e01ff1001cda/pymongo-4.9.2-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:96ad54433a996e2d1985a9cd8fc82538ca8747c95caae2daf453600cc8c317f9", size = 1910516 },
+    { url = "https://files.pythonhosted.org/packages/2b/34/895b9cad3bd5342d5ab51a853ed3a814840ce281d55c6928968e9f3f49f5/pymongo-4.9.2-cp312-cp312-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:98b9cade40f5b13e04492a42ae215c3721099be1014ddfe0fbd23f27e4f62c0c", size = 1860499 },
+    { url = "https://files.pythonhosted.org/packages/24/7e/167818f324bf2122d45551680671a3c6406a345d3fcace4e737f57bda4e4/pymongo-4.9.2-cp312-cp312-win32.whl", hash = "sha256:dde6068ae7c62ea8ee2c5701f78c6a75618cada7e11f03893687df87709558de", size = 901282 },
+    { url = "https://files.pythonhosted.org/packages/12/6b/b7ffa7114177fc1c60ae529512b82629ff7e25d19be88e97f2d0ddd16717/pymongo-4.9.2-cp312-cp312-win_amd64.whl", hash = "sha256:e1ab6cd7cd2d38ffc7ccdc79fdc166c7a91a63f844a96e3e6b2079c054391c68", size = 924925 },
+    { url = "https://files.pythonhosted.org/packages/5b/d6/b57ef5f376e2e171218a98b8c30dfd001aa5cac6338aa7f3ca76e6315667/pymongo-4.9.2-cp313-cp313-macosx_10_13_x86_64.whl", hash = "sha256:1ad79d6a74f439a068caf9a1e2daeabc20bf895263435484bbd49e90fbea7809", size = 995233 },
+    { url = "https://files.pythonhosted.org/packages/32/80/4ec79e36e99f86a063d297a334883fb5115ad70e9af46142b8dc33f636fa/pymongo-4.9.2-cp313-cp313-macosx_11_0_arm64.whl", hash = "sha256:877699e21703717507cbbea23e75b419f81a513b50b65531e1698df08b2d7094", size = 995025 },
+    { url = "https://files.pythonhosted.org/packages/c4/fd/8f5464321fdf165700f10aec93b07a75c3537be593291ac2f8c8f5f69bd0/pymongo-4.9.2-cp313-cp313-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:bc9322ce7cf116458a637ac10517b0c5926a8211202be6dbdc51dab4d4a9afc8", size = 2167429 },
+    { url = "https://files.pythonhosted.org/packages/da/42/0f749d805d17f5b17f48f2ee1aaf2a74e67939607b87b245e5ec9b4c1452/pymongo-4.9.2-cp313-cp313-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:cca029f46acf475504eedb33c7839f030c4bc4f946dcba12d9a954cc48850b79", size = 2258834 },
+    { url = "https://files.pythonhosted.org/packages/b8/52/b0c1b8e9cbeae234dd1108a906f30b680755533b7229f9f645d7e7adad25/pymongo-4.9.2-cp313-cp313-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:2c8c861e77527eec5a4b7363c16030dd0374670b620b08a5300f97594bbf5a40", size = 2216412 },
+    { url = "https://files.pythonhosted.org/packages/4d/20/53395473a1023bb6a670b68fbfa937664c75b354c2444463075ff43523e2/pymongo-4.9.2-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:1fc70326ae71b3c7b8d6af82f46bb71dafdba3c8f335b29382ae9cf263ef3a5c", size = 2168891 },
+    { url = "https://files.pythonhosted.org/packages/01/b7/fa4030279d8a4a9c0a969a719b6b89da8a59795b5cdf129ef553fce6d1f2/pymongo-4.9.2-cp313-cp313-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:ba9d2f6df977fee24437f82f7412460b0628cd6b961c4235c9cff71577a5b61f", size = 2109380 },
+    { url = "https://files.pythonhosted.org/packages/f3/55/f252972a039fc6bfca748625c5080d6f88801eb61f118fe79cde47342d6a/pymongo-4.9.2-cp313-cp313-win32.whl", hash = "sha256:b3254769e708bc4aa634745c262081d13c841a80038eff3afd15631540a1d227", size = 946962 },
+    { url = "https://files.pythonhosted.org/packages/7b/36/88d8438699ba09b714dece00a4a7462330c1d316f5eaa28db450572236f6/pymongo-4.9.2-cp313-cp313-win_amd64.whl", hash = "sha256:169b85728cc17800344ba17d736375f400ef47c9fbb4c42910c4b3e7c0247382", size = 975113 },
+    { url = "https://files.pythonhosted.org/packages/e2/0c/8101588ad2da1f023c77597aba612176051f731bf417e557275edc4102b9/pymongo-4.9.2-cp39-cp39-macosx_10_9_x86_64.whl", hash = "sha256:e54e2c6f1dec45c57a587b4c13c16666d5f7c031a642ae177140d1e0551a947e", size = 779913 },
+    { url = "https://files.pythonhosted.org/packages/66/93/2d237514aad615b94a617cc7092cdee959d99a883d156c25df2a550b6310/pymongo-4.9.2-cp39-cp39-macosx_11_0_arm64.whl", hash = "sha256:a49d9292f22a0395c0fd2822a06e385910f1f902c3a9feafc1d0bfc27cd2df6b", size = 780185 },
+    { url = "https://files.pythonhosted.org/packages/6d/c1/4300586e96af2652fe3592c1eaa70574989b4a21f2704938a857083cdcda/pymongo-4.9.2-cp39-cp39-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:80a1ee9b72eebd96619ebe0beb718a5bcf2a70f464edf315f97b9315ed6854a9", size = 1165465 },
+    { url = "https://files.pythonhosted.org/packages/04/ea/3f577b203ecad8bd59f5aef0822e7cbfd4c76fe6e05c83a4c87c405c603a/pymongo-4.9.2-cp39-cp39-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:ea9c47f86a322280381e9ddba7491e664ea80bf75df247ea2346faf7626e4e4c", size = 1198286 },
+    { url = "https://files.pythonhosted.org/packages/84/af/29248c6eaeb1055d14c8d457624b963bcd9e30be8421dd4fc2ed2e8989fd/pymongo-4.9.2-cp39-cp39-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:bf963104dfd7235bebc44cef40b4b12c6638bb03b3a828cb495498e286b6edd0", size = 1183784 },
+    { url = "https://files.pythonhosted.org/packages/56/06/ddff399f79d410efd832e6673c06d94ab7901c9698734bbb512d4d630272/pymongo-4.9.2-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:f13330bdf4a57ef70bdd6282721547ec464f773203be47bac1efc4abd74a9190", size = 1168068 },
+    { url = "https://files.pythonhosted.org/packages/cd/f0/b057d94a627f2a6468707a342ea6c788d60c729cf8d4a698333a13b70c8b/pymongo-4.9.2-cp39-cp39-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:7fb10d7069f1e7d7d6a458b1c5e9d1454be6eca2d9885bec25c1202e22c88d2a", size = 1147611 },
+    { url = "https://files.pythonhosted.org/packages/9f/f7/22ef54abf9dd083fe64153c26575bf3aec966ba50ec76b5e00e2a2ee75b3/pymongo-4.9.2-cp39-cp39-manylinux_2_5_i686.manylinux1_i686.whl", hash = "sha256:cd832de5df92caa68ee66c872708951d7e0c1f7b289b74189f2ccf1832c56dda", size = 1132542 },
+    { url = "https://files.pythonhosted.org/packages/d7/59/059fa4d81fb4f8a1cf6f04dd03a9f78119d56fd05fd656761e89b6c8d4cb/pymongo-4.9.2-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.whl", hash = "sha256:3f55efe0f77198c055800e605268bfd77a3f0223d1a80b55b771d0c350bc3ade", size = 1165854 },
+    { url = "https://files.pythonhosted.org/packages/fd/61/67a7ed51f0ce8eedc25c917dc582478caa9606d39e508441742bbcd8f674/pymongo-4.9.2-cp39-cp39-win32.whl", hash = "sha256:f2f43e5d6e739aa78c7053bdf351453c0e53d7667a3cac73255c2169631e052a", size = 765568 },
+    { url = "https://files.pythonhosted.org/packages/e3/cf/8c7a0b3d4d44ecf62bd0590d4d6a7d4e268b77de7f01f7dd362576f667d1/pymongo-4.9.2-cp39-cp39-win_amd64.whl", hash = "sha256:31c35d3dac5a1b0f65b3da2a19dc7fb88271c86329c75cfea775d5381ade6c06", size = 775323 },
 ]
 
 [[package]]
@@ -1689,6 +1753,19 @@ wheels = [
 ]
 
 [[package]]
+name = "starlette"
+version = "0.41.3"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "anyio" },
+    { name = "typing-extensions", marker = "python_full_version < '3.10'" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/1a/4c/9b5764bd22eec91c4039ef4c55334e9187085da2d8a2df7bd570869aae18/starlette-0.41.3.tar.gz", hash = "sha256:0e4ab3d16522a255be6b28260b938eae2482f98ce5cc934cb08dce8dc3ba5835", size = 2574159 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/96/00/2b325970b3060c7cecebab6d295afe763365822b1306a12eeab198f74323/starlette-0.41.3-py3-none-any.whl", hash = "sha256:44cedb2b7c77a9de33a8b74b2b90e9f50d11fcf25d8270ea525ad71a25374ff7", size = 73225 },
+]
+
+[[package]]
 name = "tenacity"
 version = "9.0.0"
 source = { registry = "https://pypi.org/simple" }
@@ -1764,6 +1841,30 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/ed/63/22ba4ebfe7430b76388e7cd448d5478814d3032121827c12a2cc287e2260/urllib3-2.2.3.tar.gz", hash = "sha256:e7d814a81dad81e6caf2ec9fdedb284ecc9c73076b62654547cc64ccdcae26e9", size = 300677 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/ce/d9/5f4c13cecde62396b0d3fe530a50ccea91e7dfc1ccf0e09c228841bb5ba8/urllib3-2.2.3-py3-none-any.whl", hash = "sha256:ca899ca043dcb1bafa3e262d73aa25c465bfb49e0bd9dd5d59f1d0acba2f8fac", size = 126338 },
+]
+
+[[package]]
+name = "uv"
+version = "0.5.12"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/9d/29/ab1b3e7a96e750e30104762407668707c6a5ed2bea13fa4442d0f8094a2f/uv-0.5.12.tar.gz", hash = "sha256:c86978fccbcafc27a71518516eb76b0abda107fe0caee81726c0ec2111956c34", size = 2549125 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/08/26/af09e78901704fa70b6f8f8e31a3e4607deb251fde71f4daf758a5a2e14c/uv-0.5.12-py3-none-linux_armv6l.whl", hash = "sha256:b88a65b0debbdcaa0f5c5c40d7f1055c66c9cdc294159e313ef99884e2f229e9", size = 14406070 },
+    { url = "https://files.pythonhosted.org/packages/38/78/7e1d2da7212bae08c388547da0664f59a8de56692f8a87b6a84e977bf163/uv-0.5.12-py3-none-macosx_10_12_x86_64.whl", hash = "sha256:62d9a703af91a2bc80d72ee0ecfaddd6f10c6033e9c7f691bf04c499280276f7", size = 14422550 },
+    { url = "https://files.pythonhosted.org/packages/a2/c7/cfea115a2588678299b5fad310d19e21f974e59d006bb4a2cf2a3afd2622/uv-0.5.12-py3-none-macosx_11_0_arm64.whl", hash = "sha256:11d2b995cf3404750373bba80d7c83cb9137974b2b908e10326b850d52423f5c", size = 13350067 },
+    { url = "https://files.pythonhosted.org/packages/fa/2f/ad23bdade79382a60a3132f802aa3f0f62edf1b67acf3bbf648c598c82e9/uv-0.5.12-py3-none-manylinux_2_17_aarch64.manylinux2014_aarch64.musllinux_1_1_aarch64.whl", hash = "sha256:e9613e56511143297a36ffcc79b677b259a98082712dee8d9bfbebee184567c1", size = 13652496 },
+    { url = "https://files.pythonhosted.org/packages/78/c3/7e7e0d0f6094df52ce6b61735495d38fda1a8d14abd935f90788753aff40/uv-0.5.12-py3-none-manylinux_2_17_armv7l.manylinux2014_armv7l.whl", hash = "sha256:daa00f38eab4903efde4f1365b104a6300dc314ddbabcefeb3bbf054615a475b", size = 14190520 },
+    { url = "https://files.pythonhosted.org/packages/b5/bd/2da82a5f3b82251d40147e4875f7193f0ff248a40767fa03ded7394d237c/uv-0.5.12-py3-none-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:8e40569f0bfac56b5a338df6aece0c1fc17ebf5b07a056244ddd14c78009da32", size = 14909725 },
+    { url = "https://files.pythonhosted.org/packages/bd/35/da2731d348d88ccd447c676a12d640eab3d0476abce3131bfe3ab50622cd/uv-0.5.12-py3-none-manylinux_2_17_ppc64.manylinux2014_ppc64.whl", hash = "sha256:fc8c7bbb2af9cb98c6d040ce20edec365864aa3a5f8a4542add95314aff54499", size = 15507659 },
+    { url = "https://files.pythonhosted.org/packages/67/29/f8f63bcd14946f122e9276bbb4e94fbc526cbcd84af6a4ff7e37ab373e4d/uv-0.5.12-py3-none-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:a27bb407c20e905cde7a63d99db780e6eef4d54a2bebbb2809950a9d2049c7ce", size = 15227820 },
+    { url = "https://files.pythonhosted.org/packages/c5/26/e3c539e105f911b82d75979a3decff65b82b70847eef3bf2ab40cedc9a60/uv-0.5.12-py3-none-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:2a1904c3d893fc42a44f20cdaee718ac8a061a67d8b2c71807c247924337f213", size = 19966081 },
+    { url = "https://files.pythonhosted.org/packages/61/72/91865120b7d5d7f25ff1a5a7c910503b1c6f7fd72cbaf48a3a2a949ddd33/uv-0.5.12-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:7ae6220e8488d52c4b28088d721d12a53836addcfd38ea8f1357702f363e283b", size = 14991752 },
+    { url = "https://files.pythonhosted.org/packages/08/10/b212cbfe9aafc0d9aa5cf1fb4beaa7d98a11e63e5dc4ce64625e447e5363/uv-0.5.12-py3-none-manylinux_2_28_aarch64.whl", hash = "sha256:89590c9241a035a1d35d82f686d1035a661835ce0c906856cd555d0505e9ec55", size = 13877181 },
+    { url = "https://files.pythonhosted.org/packages/45/6c/630552099ad2363bccd7c41c34abebfd9cedc9e15e77341280e809f31a68/uv-0.5.12-py3-none-musllinux_1_1_armv7l.whl", hash = "sha256:58736dce655c4ab11e0a0b556e2a0c9d5bbf45881f5082b310e7490f1d6def90", size = 14200951 },
+    { url = "https://files.pythonhosted.org/packages/53/fb/3ceec9d50f309517852064cbe5a37d54b2ce5205c9278325d6b08fe8564b/uv-0.5.12-py3-none-musllinux_1_1_i686.whl", hash = "sha256:a0384c75337b625fb8f22cef97b012ba8091af4cbc48fbeb54c4bc0398c48514", size = 14567603 },
+    { url = "https://files.pythonhosted.org/packages/6b/62/5a7b169f9760cdd2057badf1c93db4df4a9d449805d6cca27beb1ceda027/uv-0.5.12-py3-none-musllinux_1_1_x86_64.whl", hash = "sha256:2308fd4ef9f5ff94d6dc36b4d124909403d502103e9866b5c2323938fc486b8c", size = 15112312 },
+    { url = "https://files.pythonhosted.org/packages/90/b2/1ff5575e1e1ae3d09c9b6343fcb4f5c994595afa9e9093ead62ce2db1450/uv-0.5.12-py3-none-win32.whl", hash = "sha256:aede4008c27b6f34265b404cf9561dc308a630d6a32189da9ad24bc20e8cb139", size = 14459296 },
+    { url = "https://files.pythonhosted.org/packages/2a/19/e0eee2200cc443981035e6b2cb9662446f4c5aff1a902a81feff5d77be7e/uv-0.5.12-py3-none-win_amd64.whl", hash = "sha256:75b8910c9f61c87f370eb168da967110de11cc298d7c3893bb06e9fa5c45f044", size = 16296244 },
 ]
 
 [[package]]

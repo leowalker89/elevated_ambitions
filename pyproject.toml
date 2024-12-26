@@ -20,6 +20,14 @@ dependencies = [
     "python-dotenv",
     "tqdm",
     "langgraph>=0.2.59",
+    "pydantic-settings>=2.0.0",
+    "uv",
+    "aiohttp",
+    "nest-asyncio",
+    "pydantic>=2.0.0",
+    "fastapi",
+    "httpx",
+    "motor>=3.3.0",
 ]
 
 [tool.pytest.ini_options]
@@ -30,4 +38,7 @@ asyncio_mode = "auto"
 
 [tool.hatch.build.targets.wheel]
 packages = ["backend"]
+
+[tool.logfire]
+ignore_no_config = true
 
