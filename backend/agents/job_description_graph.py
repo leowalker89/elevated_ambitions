@@ -16,7 +16,7 @@ def should_continue(state: JobDescriptionProcessingState) -> str:
     # Check grading results
     if state.grader_output:
         # High quality - we're done
-        if state.grader_output.overall_quality_score >= 0.8:
+        if state.grader_output.overall_quality_score >= 0.9:
             state.status = "completed"
             return END
             
